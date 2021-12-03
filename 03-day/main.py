@@ -50,6 +50,5 @@ for d in range(w):
 
 co2_rating = co2_bits[0]
 
-# 4191984 too low
 res_b = int(oxygen_rating, base=2)*int(co2_rating, base=2)
 print(f"B ::: Life support rating = {res_b}")
