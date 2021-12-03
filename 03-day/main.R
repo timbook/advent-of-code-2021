@@ -1,4 +1,5 @@
 library(magrittr)
+
 bits <- readLines('input.txt')
 
 vecToStr <- function(v) v %>% as.character() %>% paste0(collapse = '')
@@ -6,6 +7,12 @@ vecToStr <- function(v) v %>% as.character() %>% paste0(collapse = '')
 lineToRow <- function(l) {
   vec <- strsplit(l, split = '')[[1]]
   matrix(as.numeric(vec), 1, length(vec))
+}
+
+colMode <- function(X) {
+  n <- nrow(X)
+  n1 <- sum(X[,d])
+  (2*n1 >= n)*1
 }
 
 X <- sapply(bits, lineToRow) %>% unname() %>% t()
@@ -20,27 +27,20 @@ res_a <- strtoi(gamma, base = 2)*strtoi(epsilon, base = 2)
 
 O2 <- X
 for (d in 1:ncol(O2)) {
-  n <- nrow(O2)
-  n1 <- sum(O2[,d])
-  mode <- (2*n1 >= n)*1
-  O2 <- O2[O2[, d] == mode, , drop = FALSE]
+  O2 <- O2[O2[, d] == colMode(O2), , drop = FALSE]
   if (nrow(O2) == 1) break
 }
 
-O2_bin <- vecToStr(O2)
-
 CO2 <- X
 for (d in 1:ncol(CO2)) {
-  n <- nrow(CO2)
-  n1 <- sum(CO2[,d])
-  mode <- (2*n1 >= n)*1
-  CO2 <- CO2[CO2[, d] == 1 - mode, , drop = FALSE]
+  CO2 <- CO2[CO2[, d] == 1 - colMode(CO2), , drop = FALSE]
   if (nrow(CO2) == 1) break
 }
 
-CO2_bin <- vecToStr(CO2)
+O2_dec <- vecToStr(O2) %>% strtoi(base = 2)
+CO2_dec <- vecToStr(CO2) %>% strtoi(base = 2)
 
-res_b <- strtoi(O2_bin, base = 2)*strtoi(CO2_bin, base = 2)
+res_b <- O2_dec*CO2_dec
 
 cat("A ::: Power consumption =", res_a, '\n')
 cat("B ::: Life support rating =", res_b, '\n')
