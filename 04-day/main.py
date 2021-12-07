@@ -20,8 +20,6 @@ class Board:
     def check(self):
         rows = [all(self.marks[i,:]) for i in range(5)]
         cols = [all(self.marks[:,i]) for i in range(5)]
-        #  diag1 = all(self.marks[i, i] for i in range(5))
-        #  diag2 = all(self.marks[i, 4 - i] for i in range(5))
         return any(rows) or any(cols)
 
     def score(self):
@@ -49,7 +47,6 @@ for draw in draws:
 
     # Mark all boards
     _ = [b.mark(draw) for b in boards]
-
 
     if len(boards) > 1:
         # Drop completed boards
