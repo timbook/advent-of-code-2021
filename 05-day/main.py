@@ -79,10 +79,11 @@ grid = Grid(x_max, y_max)
 for vent in vents:
     if vent.x1 == vent.x2 or vent.y1 == vent.y2:
         grid.add_vent(vent)
-print(grid.count_overlaps())
+n_overlap_a = grid.count_overlaps()
+print(f"A ::: Number of overlaps: {n_overlap_a}")
 
 grid = Grid(x_max, y_max)
 for vent in vents:
     grid.add_vent(vent)
-# 20250: Too low
-print(grid.count_overlaps())
+n_overlap_b = grid.count_overlaps()
+print(f"B ::: Number of overlaps: {n_overlap_b}")
