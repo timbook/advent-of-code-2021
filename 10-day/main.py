@@ -1,4 +1,3 @@
-from collections import deque
 import numpy as np
 
 with open('data/input.txt', 'r') as f:
@@ -19,7 +18,6 @@ class Code:
                 self.stack.append(char)
             elif char in ')]}>':
                 if self.r2l_map[char] != self.stack[-1]:
-                    #  import pdb; pdb.set_trace()
                     self.corrupted = True
                     self.offending_char = char
                     break
@@ -39,9 +37,6 @@ class Code:
             score *= 5
             score += point_map[char]
         return score
-
-
-
 
 codes = [Code(line) for line in lines]
 
