@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 import re
 
 lines = open('data/input.txt', 'r').read()
@@ -97,5 +98,4 @@ for v, n in directions[1:]:
 sh.mirror()
 print("B ::: Folded manual:")
 print(sh)
-
 sh.plot()
